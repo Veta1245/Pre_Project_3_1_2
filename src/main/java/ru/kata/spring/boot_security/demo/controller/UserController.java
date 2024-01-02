@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserSecurityService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
@@ -14,18 +13,19 @@ import java.security.Principal;
 @Controller
 public class UserController {
 
-    private final UserSecurityService userDetail;
+
     private final UserService userService;
 
     @Autowired
-    public UserController(UserSecurityService userDetail, UserService userService) {
-        this.userDetail = userDetail;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/user")
-    public String infoAboutUser(Model model, Principal principal) {
-        model.addAttribute("user", userDetail.findByName(principal.getName()));
+    public String getUserPage(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUsername(username);
+        model.addAttribute("user", user);
         return "user";
     }
 

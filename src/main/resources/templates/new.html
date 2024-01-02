@@ -24,7 +24,7 @@
         <label for="lastname">Фамилия: </label>
     </div>
     <div>
-        <input th:type="text" th:field="*{lastName}" id="lastname">
+        <input th:type="text" th:field="*{lastname}" id="lastname">
         <br/>
         <label for="email">Email: </label>
     </div>
@@ -40,13 +40,11 @@
     </div>
     <input th:type="text" th:field="*{password}" id="password">
     <br/>
-    <label>
-        <select th:field="*{roleList}" multiple="multiple" required>
-            <option th:each="role : ${role}"
-                    th:value="${role.id}"
-                    th:text="${role.status}">
-
-            </option>
+    <label class="role-select-container">
+        Role:
+        <select name="role">
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_USER">USER</option>
         </select>
     </label>
     <button type="submit" class="button button2">Добавить</button>
@@ -86,7 +84,7 @@
         background: #686461;
         border: none;
         position: absolute;
-        top: 270px;
+        top: 310px;
 
 
     }
@@ -102,7 +100,8 @@
         border: none;
         font-size: 15px;
         position: absolute;
-        top: 240px;
+        top: 280px;
+        left: 8px;
 
 
     }
@@ -113,10 +112,11 @@
 
     select {
         position: absolute;
-        top: 170px;
-        left: 200px;
-        background: #8FD4C1;
+        top: 255px;
+        left: 8px;
+        background: #E8E6D1;
         border: none;
+        color: #B9B29F;
     }
 
 </style>

@@ -1,58 +1,37 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
-@Table(name = "role")
 public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "status")
-    private String status;
+    private Long id;
 
-    public Role() {
-    }
+    @Column(name = "role_name", unique = true)
+    private String name;
 
-    @ManyToMany(mappedBy = "roleList")
-    private List<User> userList;
-
-    public Role(int id, String status, List<User> userList) {
-        this.id = id;
-        this.status = status;
-        this.userList = userList;
+    public Role(String name) {
+        this.name = name;
     }
 
     @Override
     public String getAuthority() {
-        return status;
+        return name;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
 }

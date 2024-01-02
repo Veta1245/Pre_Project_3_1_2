@@ -10,9 +10,14 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    void updateUser(Long id, User user);
+
+    List<User> listUsers();
+
+    void addRoleToUser(String roleName, User user);
 
     User showUser(Long id);
 
-    List<User> listUsers();
+    User findByUsername(String username);
+
+
 }
