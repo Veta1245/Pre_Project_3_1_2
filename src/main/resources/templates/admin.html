@@ -17,12 +17,14 @@
         <th>Username</th>
         <th></th>
         <th></th>
+
     </tr>
     <tr th:each="user : ${users}">
         <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="${user.getName()}"></a></td>
         <td><a th:text="${user.getLastname()}"></a></td>
         <td th:text="${user.getEmail()}"></td>
         <td th:text="${user.getUsername()}"></td>
+
         <td>
             <form th:action="@{/admin/delete?id={id}(id=${user.id})}" method="post" th:method="delete">
                 <input type="hidden" name="id" th:value="${user.getId()}"/>

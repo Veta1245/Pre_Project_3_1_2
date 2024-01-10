@@ -13,7 +13,7 @@ public interface UserService {
 
     List<User> listUsers();
 
-    void addRoleToUser(String roleName, User user);
+    void updateUser(Long id, User user);
 
     User showUser(Long id);
 

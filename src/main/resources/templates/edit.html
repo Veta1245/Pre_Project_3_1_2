@@ -21,7 +21,7 @@
     </tr>
 
 </table>
-<form th:method="POST" th:action="@{/admin}" th:object="${user}" accept-charset="UTF-8">
+<form th:method="POST" th:action="@{/admin/edit?id={id}(id=${user.id})}" th:object="${user}" accept-charset="UTF-8">
 
     <div>
         <input type="hidden" th:field="*{id}"/>
@@ -49,11 +49,14 @@
     </div>
     <input th:type="text" th:field="*{password}" id="password">
     <br/>
-    <label class="role-select-container">
+    <label class="label role">
         Role:
-        <select name="role">
-            <option value="ROLE_ADMIN">ADMIN</option>
-            <option value="ROLE_USER">USER</option>
+        <select th:field="*{roleList}" multiple="multiple" required>
+            <option th:each="role : ${role}"
+                    th:value="${role.id}"
+                    th:text="${role.name}">
+
+            </option>
         </select>
     </label>
     <button type="submit" class="button button2">Изменить</button>
@@ -79,6 +82,13 @@
 
     label {
         color: #B9B29F;
+
+    }
+
+    label.role {
+        position: absolute;
+        top: 170px;
+        left: 190px;
 
     }
 
@@ -120,9 +130,6 @@
     }
 
     select {
-        position: absolute;
-        top: 255px;
-        left: 8px;
         background: #E8E6D1;
         border: none;
         color: #B9B29F;
